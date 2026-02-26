@@ -66,6 +66,7 @@
 		<main>
 			<div>
 				<h1>Manipulación de audio </h1>
+				<!--
 				<div>
 					<span>Etiqueta de audio unicamente con source</span>
 					<audio id="ejemplo1" src="media\sounds\01GroundTheme.mp3">
@@ -114,8 +115,56 @@
 				<button type ="button" id="play" class="btn btn-primary">Reproducir</button>
 				<button type ="button" id="pause" class="btn btn-primary">Pausar</button>
 			</div>
+			-->
+			
+			<div id="drumSet">
+				<button type="button" id="KeyW" class="btn btn-secondary">Tambor 1</button>
+				<button type="button" id="KeyA" class="btn btn-secondary">Tambor 2</button>
+				<button type="button" id="KeyS" class="btn btn-secondary">Tambor 3</button>
+				<button type="button" id="KeyD" class="btn btn-secondary">Tambor 4</button>
+				<button type="button" id="KeyJ" class="btn btn-secondary">Snare</button>
+				<button type="button" id="KeyK" class="btn btn-secondary">Crash</button>
+				<button type="button" id="KeyL" class="btn btn-secondary">Kick Bass</button>
+			</div>
 
+			
 			<script type="text/javascript">
+
+				var audio = new Audio()
+
+
+				const sounds = {
+					'KeyW':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/tom1.ogg',
+					'KeyA':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/tom2.ogg',
+					'KeyS':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/tom3.ogg',
+					'KeyD':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/pad1.ogg',
+					'KeyJ':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/snare1.ogg',
+					'KeyK':'https://freesound.org/data/previews/263/263132_2064400-lq.mp3',
+					'KeyL':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/kik.ogg',
+				}
+
+				//Metodo para la ejecucion de sonido
+				const play = sound => {
+					console.log("Sonando: ",sound);
+					var audio = new Audio(sound);
+					audio.play();
+				}
+
+				//Captura de indice de arreglo de sonidos
+				document.getElementById('drumSet').addEventListener('click',function(e){
+					const tgt = e.target.closest('button');
+					if(tgt) play(sounds[tgt.id]);
+				});
+
+				//Ejecucion de sonido a partir del evento keypress
+				window.addEventListener('keypress',function(e){
+					console.log(e.code);
+					if(sounds[e.code]){
+						console.log("Presionando la tecla: ", e.code);
+						document.getElementById(e.code).click();
+					}
+				})
+				/*
 				window.onload = () => {
 					const audio = document.getElementById("Reproductor");
 					const pause = document.getElementById("pause");
@@ -131,9 +180,10 @@
 					function pauseAudio(){
 						audio.pause();
 					}
-				}
+				}*/
 
 			</script>
+	
 		</main>
 	</body>
 </html>
